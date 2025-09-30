@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Barber — Home</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxvA5u3uCgcTXPGgg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header + Hero share same background -->
+  <header class="site-hero" role="banner" aria-label="Hero com background">
+    <!-- NAVBAR -->
+    <nav class="navbar" role="navigation" aria-label="Menu principal">
+      <ul class="nav-left" role="menubar">
+        <li class="nav-item active"><a href="#">Home</a></li>
+        <li class="nav-item"><a href="#">Services+</a></li>
+        <li class="nav-item"><a href="#">Pricing+</a></li>
+        <li class="nav-item"><a href="#">Gallery+</a></li>
+      </ul>
+
+      <div class="logo-wrap" aria-hidden="false">
+        <a href="#" class="logo-link" aria-label="Início">
+          <img src="assets/images/Logo.png" alt="Logo" width="76" height="76">
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <a class="btn-book" href="#">Book Now</a>
+
+        <!-- Language picker (desktop) -->
+        <div class="language-selector" id="desktop-lang" aria-haspopup="true">
+          <button class="lang-btn" id="desktop-lang-btn" aria-expanded="false" aria-label="Selecionar idioma">
+            <img src="https://flagcdn.com/w20/pt.png" alt="PT" id="current-flag">
+          </button>
+          <ul class="lang-dropdown" role="menu" aria-label="Línguas">
+            <li data-lang="pt" role="menuitem"><img src="https://flagcdn.com/w20/pt.png" alt="Português"> Português</li>
+            <li data-lang="en" role="menuitem"><img src="https://flagcdn.com/w20/gb.png" alt="English"> English</li>
+          </ul>
+        </div>
+
+        <button class="icon-btn" aria-label="Conta"><i class="fa-regular fa-user"></i></button>
+        <button class="icon-btn" aria-label="Bloquear"><i class="fa-solid fa-lock"></i></button>
+      </div>
+
+      <!-- mobile toggle -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile offcanvas -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services+</a></li>
+        <li><a href="#">Pricing+</a></li>
+        <li><a href="#">Gallery+</a></li>
+        <li><a class="mobile-book" href="#">Book Now</a></li>
+        <li>
+          <!-- Mobile language picker -->
+          <div class="language-selector mobile-lang" id="mobile-lang" aria-haspopup="true">
+            <button class="lang-btn" id="mobile-lang-btn" aria-expanded="false" aria-label="Selecionar idioma">
+              <img src="https://flagcdn.com/w20/pt.png" alt="PT" id="m-current-flag">
+            </button>
+            <ul class="lang-dropdown" role="menu" aria-label="Línguas">
+              <li data-lang="pt" role="menuitem"><img src="https://flagcdn.com/w20/pt.png" alt="Português"> Português</li>
+              <li data-lang="en" role="menuitem"><img src="https://flagcdn.com/w20/gb.png" alt="English"> English</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Vertical watermark text left -->
+    <div class="vertical-text" aria-hidden="true">BARBER</div>
+
+    <!-- Hero content (right) -->
+    <div class="hero-content" role="region" aria-label="Conteúdo principal">
+      <div class="kicker">Welcome to Barber</div>
+      <h1 class="hero-title">
+        STYLE THAT<br>SETS <span class="accent">YOU APART!</span>
+      </h1>
+      <p class="hero-sub">Top-notch service from professional barbers.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">Book Now</a>
+        <a class="btn btn-ghost" href="#services">Our Services</a>
+      </div>
+    </div>
+  </header>
+
+<!-- HTML -->
+<section class="services">
+  <div class="container sercices-content">
+    <h1>Explore Our Services</h1>
+  </div>
+
+  <div class="container cards-wrapper">
+    <!-- Card 1 -->
+    <article class="card">
+      <div class="card-content">
+        <div class="icon" aria-hidden="true">
+          <img src="assets/images/card1.png" alt="card1">
+        </div>
+        <h4>Haircuts</h4>
+        <p class="desc">Classic and modern cuts tailored to your style.</p>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card">
+      <div class="card-content">
+        <div class="icon" aria-hidden="true">
+          <img src="assets/images/card1.png" alt="card1">
+        </div>
+        <h4>Beard Trim</h4>
+        <p class="desc">Smooth, clean shaves and perfectly shaped.</p>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card">
+      <div class="card-content">
+        <div class="icon" aria-hidden="true">
+          <img src="assets/images/card1.png" alt="card1">
+        </div>
+        <h4>Towel Shave</h4>
+        <p class="desc">Premium experience for an ultra-smooth finish.</p>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="card">
+      <div class="card-content">
+        <div class="icon" aria-hidden="true">
+          <img src="assets/images/card1.png" alt="card1">
+        </div>
+        <h4>Hair Color</h4>
+        <p class="desc">Get a bold new shade or enhance natural color.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+  
+</body>
+</html>
