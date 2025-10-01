@@ -1,158 +1,313 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Barber — Home</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Barbearia — Início</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Font Awesome (icons) -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxvA5u3uCgcTXPGgg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-  <!-- Header + Hero share same background -->
-  <header class="site-hero" role="banner" aria-label="Hero com background">
-    <!-- NAVBAR -->
-    <nav class="navbar" role="navigation" aria-label="Menu principal">
-      <ul class="nav-left" role="menubar">
-        <li class="nav-item active"><a href="#">Home</a></li>
-        <li class="nav-item"><a href="#">Services+</a></li>
-        <li class="nav-item"><a href="#">Pricing+</a></li>
-        <li class="nav-item"><a href="#">Gallery+</a></li>
-      </ul>
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- Header + Hero -->
+    <header class="site-hero" role="banner" aria-label="Hero com background">
+      <!-- NAVBAR (reformulada) -->
+      <nav class="containerNavbar navbar" role="navigation" aria-label="Menu principal">
+        <div class="nav-inner">
+          <!-- Logo (left) -->
+          <a href="#" class="logo-link" aria-label="Início">
+            <img
+              src="assets/images/Logo.png"
+              alt="Logo"
+              width="76"
+              height="76"
+            />
+          </a>
 
-      <div class="logo-wrap" aria-hidden="false">
-        <a href="#" class="logo-link" aria-label="Início">
-          <img src="assets/images/Logo.png" alt="Logo" width="76" height="76">
-        </a>
-      </div>
-
-      <div class="nav-right">
-        <a class="btn-book" href="#">Book Now</a>
-
-        <!-- Language picker (desktop) -->
-        <div class="language-selector" id="desktop-lang" aria-haspopup="true">
-          <button class="lang-btn" id="desktop-lang-btn" aria-expanded="false" aria-label="Selecionar idioma">
-            <img src="https://flagcdn.com/w20/pt.png" alt="PT" id="current-flag">
-          </button>
-          <ul class="lang-dropdown" role="menu" aria-label="Línguas">
-            <li data-lang="pt" role="menuitem"><img src="https://flagcdn.com/w20/pt.png" alt="Português"> Português</li>
-            <li data-lang="en" role="menuitem"><img src="https://flagcdn.com/w20/gb.png" alt="English"> English</li>
+          <!-- Links (right) -->
+          <ul class="nav-links" role="menubar" aria-label="Menu principal">
+            <li class="nav-item active" role="none"><a role="menuitem" href="#">Início</a></li>
+            <li class="nav-item" role="none"><a role="menuitem" href="#services">Serviços</a></li>
+            <li class="nav-item" role="none"><a role="menuitem" href="#team">Equipa</a></li>
+            <li class="nav-item" role="none"><a role="menuitem" href="#gallery">Galeria</a></li>
           </ul>
-        </div>
 
-        <button class="icon-btn" aria-label="Conta"><i class="fa-regular fa-user"></i></button>
-        <button class="icon-btn" aria-label="Bloquear"><i class="fa-solid fa-lock"></i></button>
+          <!-- mobile toggle: FontAwesome icons (barra) -->
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile offcanvas (adicionado botão de fechar dentro do painel) -->
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+        <!-- Botão de fechar que fica dentro do painel -->
+        <button class="mobile-close" id="mobile-close" aria-label="Fechar menu" aria-hidden="true">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <ul>
+          <li><a href="#">Início</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#team">Equipa</a></li>
+          <li><a href="#gallery">Galeria</a></li>
+          <li><a class="mobile-book" href="#">Marcar Agora</a></li>
+        </ul>
       </div>
 
-      <!-- mobile toggle -->
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </nav>
+      <!-- Vertical watermark text left -->
+      <div class="vertical-text" aria-hidden="true">BARBEARIA</div>
 
-    <!-- Mobile offcanvas -->
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Services+</a></li>
-        <li><a href="#">Pricing+</a></li>
-        <li><a href="#">Gallery+</a></li>
-        <li><a class="mobile-book" href="#">Book Now</a></li>
-        <li>
-          <!-- Mobile language picker -->
-          <div class="language-selector mobile-lang" id="mobile-lang" aria-haspopup="true">
-            <button class="lang-btn" id="mobile-lang-btn" aria-expanded="false" aria-label="Selecionar idioma">
-              <img src="https://flagcdn.com/w20/pt.png" alt="PT" id="m-current-flag">
-            </button>
-            <ul class="lang-dropdown" role="menu" aria-label="Línguas">
-              <li data-lang="pt" role="menuitem"><img src="https://flagcdn.com/w20/pt.png" alt="Português"> Português</li>
-              <li data-lang="en" role="menuitem"><img src="https://flagcdn.com/w20/gb.png" alt="English"> English</li>
-            </ul>
+      <!-- Hero content (right) -->
+      <div class="hero-content" role="region" aria-label="Conteúdo principal">
+        <div class="kicker">Bem-vindo à Barbearia da Praça</div>
+        <h1 class="hero-title">
+          ESTILO<br />QUE <span class="accent">TE DIFERENCIA!</span>
+        </h1>
+        <p class="hero-sub">
+          Serviço de primeira qualidade por barbeiros profissionais.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#">MARQUE JÁ</a>
+          <a class="btn btn-ghost" href="#services">SERVIÇOS</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="about-us">
+      <div class="container about-inner">
+        <div class="about-left">
+        <h1 id="abouttitle">PORQUE ESCOLHER A <span>BARBEARIA DA PRAÇA?</span></h1>
+        <p>
+          Os nossos barbeiros especialistas dominam cortes clássicos, modernos e personalizados para todos os tipos e texturas de cabelo. 
+          Seja um estilo intemporal ou a última tendência, garantimos que ficará sempre impecável.
+        </p>
+        <div class="stats">
+          <div class="stat1">
+            <h1>99<span>%</span></h1>
+            <h3>Satisfação dos Clientes</h3>
           </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Vertical watermark text left -->
-    <div class="vertical-text" aria-hidden="true">BARBER</div>
-
-    <!-- Hero content (right) -->
-    <div class="hero-content" role="region" aria-label="Conteúdo principal">
-      <div class="kicker">Welcome to Barber</div>
-      <h1 class="hero-title">
-        STYLE THAT<br>SETS <span class="accent">YOU APART!</span>
-      </h1>
-      <p class="hero-sub">Top-notch service from professional barbers.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#">Book Now</a>
-        <a class="btn btn-ghost" href="#services">Our Services</a>
-      </div>
-    </div>
-  </header>
-
-<!-- HTML -->
-<section class="services">
-  <div class="container sercices-content">
-    <h1>Explore Our Services</h1>
-  </div>
-
-  <div class="container cards-wrapper">
-    <!-- Card 1 -->
-    <article class="card">
-      <div class="card-content">
-        <div class="icon" aria-hidden="true">
-          <img src="assets/images/card1.png" alt="card1">
+          <div class="stat2">
+            <h1>10<span>+</span></h1>
+            <h3>Anos de Experiência</h3>
+          </div>
         </div>
-        <h4>Haircuts</h4>
-        <p class="desc">Classic and modern cuts tailored to your style.</p>
-      </div>
-    </article>
-
-    <!-- Card 2 -->
-    <article class="card">
-      <div class="card-content">
-        <div class="icon" aria-hidden="true">
-          <img src="assets/images/card1.png" alt="card1">
         </div>
-        <h4>Beard Trim</h4>
-        <p class="desc">Smooth, clean shaves and perfectly shaped.</p>
-      </div>
-    </article>
-
-    <!-- Card 3 -->
-    <article class="card">
-      <div class="card-content">
-        <div class="icon" aria-hidden="true">
-          <img src="assets/images/card1.png" alt="card1">
+        <div class="about-right">
+          <img src="assets/images/ABOUTUS.jpg" alt="Sobre Nós">
         </div>
-        <h4>Towel Shave</h4>
-        <p class="desc">Premium experience for an ultra-smooth finish.</p>
       </div>
-    </article>
+    </section>
 
-    <!-- Card 4 -->
-    <article class="card">
-      <div class="card-content">
-        <div class="icon" aria-hidden="true">
-          <img src="assets/images/card1.png" alt="card1">
+    <section id="services" class="services">
+      <div class="container sercices-content">
+        <h1>Os Nossos Serviços</h1>
+      </div>
+
+      <div class="container cards-wrapper">
+        <!-- Card 1 -->
+        <article class="card">
+          <div class="card-content">
+            <div class="icon" aria-hidden="true">
+              <img src="assets/images/card1.png" alt="Corte de Cabelo" />
+            </div>
+            <h4>Cortes de Cabelo</h4>
+            <p class="desc">Cortes clássicos e modernos adaptados ao seu estilo.</p>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="card-content">
+            <div class="icon" aria-hidden="true">
+              <img src="assets/images/card2.png" alt="Aparar Barba" />
+            </div>
+            <h4>Aparar Barba</h4>
+            <p class="desc">Barbas perfeitamente modeladas e acabamentos suaves.</p>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="card-content">
+            <div class="icon" aria-hidden="true">
+              <img src="assets/images/card3.png" alt="Barbear com Toalha" />
+            </div>
+            <h4>Barbear com Toalha</h4>
+            <p class="desc">Experiência premium para um acabamento ultra-suave.</p>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card">
+          <div class="card-content">
+            <div class="icon" aria-hidden="true">
+              <img src="assets/images/card4.png" alt="Coloração de Cabelo" />
+            </div>
+            <h4>Coloração de Cabelo</h4>
+            <p class="desc">Obtenha uma nova cor ousada ou realce a sua cor natural.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="team" class="Team">
+      <div class="container team-inner">
+        <h1>Conheça a nossa equipa de especialistas</h1>
+        <p>Cada membro da nossa equipe está comprometido em proporcionar uma experiência de higiene excepcional,
+           garantindo que você saia da nossa loja se sentindo impecável e no seu melhor.
+        </p>
+        <div class="team-row">
+          <div class="team-members">
+            <div class="member">
+              <div class="name-bubble">
+                <span>Bruno Carvalho</span>
+                <span>Master Barber</span>
+              </div>
+              <div class="social-member">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <img src="assets/images/TeamCard1.png" alt="PESSOA1">
+            </div>
+            <div class="member">
+              <div class="name-bubble">
+                <span>Rafael Gonçalves</span>
+                <span>Junior Barber</span>
+              </div>
+              <div class="social-member">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <img src="assets/images/master.png" alt="PESSOA1">
+            </div>
+          </div>
         </div>
-        <h4>Hair Color</h4>
-        <p class="desc">Get a bold new shade or enhance natural color.</p>
       </div>
-    </article>
-  </div>
-</section>
+    </section>
 
+    <!-- --- JS: scroll behaviour + mobile toggle (apenas para navbar) --- -->
+    <script>
+      (function () {
+        const navbar = document.querySelector('.navbar');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.getElementById('mobile-close');
 
-  
-</body>
+        // Ensure initial icon/labels are consistent on load
+        function setClosedState() {
+          mobileMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+
+          // hide the close button inside the mobile panel
+          if (mobileClose) {
+            mobileClose.setAttribute('aria-hidden', 'true');
+            mobileClose.style.display = 'none';
+          }
+
+          // ensure the toggle button has the "open" label
+          menuToggle.setAttribute('aria-label', 'Abrir menu');
+        }
+
+        // Scroll handler: add/remove .scrolled
+        function onScroll() {
+          if (window.scrollY > 20) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        }
+
+        // Mobile toggle: open/close off-canvas and show close icon inside panel
+        function toggleMobileMenu() {
+          const isOpen = mobileMenu.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+
+          if (isOpen) {
+            // show close button inside the mobile menu
+            if (mobileClose) {
+              mobileClose.setAttribute('aria-hidden', 'false');
+              mobileClose.style.display = 'flex';
+            }
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+          } else {
+            if (mobileClose) {
+              mobileClose.setAttribute('aria-hidden', 'true');
+              mobileClose.style.display = 'none';
+            }
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+          }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        menuToggle.addEventListener('click', function (e) {
+          e.stopPropagation(); // prevent immediate outside click handler from firing
+          toggleMobileMenu();
+        });
+
+        // close button inside the mobile panel
+        if (mobileClose) {
+          mobileClose.addEventListener('click', function (e) {
+            e.stopPropagation();
+            // close the panel
+            mobileMenu.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            mobileClose.setAttribute('aria-hidden', 'true');
+            mobileClose.style.display = 'none';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+          });
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (e) {
+          const isClickInsideMenu = mobileMenu.contains(e.target) || menuToggle.contains(e.target);
+          if (!isClickInsideMenu && mobileMenu.classList.contains('open')) {
+            // close
+            mobileMenu.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            // hide close button inside panel
+            if (mobileClose) {
+              mobileClose.setAttribute('aria-hidden', 'true');
+              mobileClose.style.display = 'none';
+            }
+            // restore label
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+          }
+        });
+
+        // Optional: close menu with Escape key for accessibility
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+            mobileMenu.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            if (mobileClose) {
+              mobileClose.setAttribute('aria-hidden', 'true');
+              mobileClose.style.display = 'none';
+            }
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+          }
+        });
+
+        // Initial state check (in case page loaded not at top)
+        onScroll();
+        setClosedState();
+      })();
+    </script>
+  </body>
 </html>
