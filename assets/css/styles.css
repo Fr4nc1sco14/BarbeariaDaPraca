@@ -417,6 +417,168 @@ body {
 .card h4 { margin: 0; font-size: 18px; font-weight: 700; font-family: "Poppins", sans-serif; color: #fff; text-align: left; }
 .card .desc { margin: 0; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.9); text-align: center; max-width: 100%; }
 
+
+
+/* ===== Footer: 3 colunas + bottom strip ===== */
+.site-footer {
+  background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(2,2,2,0.98));
+  color: #e6e6e6;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 36px;
+  padding-bottom: 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  align-items: start;
+  padding-bottom: 28px;
+}
+
+/* Colunas */
+.footer-col h4 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.footer-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  position: relative;
+  top: -35px;
+}
+
+/* Mapa pequeno */
+.footer-map {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  top: -40px;
+  align-items: flex-start;
+}
+
+.map-iframe {
+  width: 240px;
+  height: 140px;
+  border: 0;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+  filter: grayscale(100%) invert(92%) contrast(83%);
+}
+
+.map-iframe:hover {
+  transform: scale(1.02);
+}
+
+.map-link {
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.map-link:hover {
+  color: #fff;
+}
+
+#footer-menu-title {color: var(--accent);}
+#footer-hours-title {color: var(--accent);}
+
+/* Menu simples */
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.footer-menu a {
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  transition: color 0.15s ease;
+}
+.footer-menu a:hover {
+  color: var(--accent);
+}
+
+/* Horário + botão */
+.footer-hours {
+  color: #d6d6d6;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  font-size: 14px;
+  font-weight: 400;
+}
+.footer-cta {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  background: var(--accent);
+  color: #fff;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer-cta:hover {
+  background: #c18f4c;
+  transform: translateY(-2px);
+}
+
+/* tira inferior */
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin-top: 24px;
+  padding: 14px 0;
+  background: rgba(0,0,0,0.03);
+}
+
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px 0;
+}
+
+/* socials */
+.footer-socials a {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  opacity: 0.95;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.footer-socials a i { font-size: 1.1rem; }
+.footer-socials a:hover { color: var(--accent); transform: translateY(-3px); }
+
+/* copyright */
+.footer-copy {
+  color: #bdbdbd;
+  font-size: 0.95rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+
 @media (max-width: 1000px) {
   /* HERO */
   .hero-content { 
@@ -528,4 +690,54 @@ body {
   }
   .sercices-content { margin-bottom: 16px; }
   .sercices-content h1 { font-size: 28px; }
+
+
+  .footer-grid {margin-top: 10px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-map {
+    align-items: center;
+  }
+
+  .map-iframe {
+    width: 80%;
+    max-width: 300px;
+    height: 180px;
+  }
+  #footer-menu-title {font-size: 24px;}
+  #footer-hours-title {font-size: 24px;}
+
+  .footer-menu {
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .footer-hours {
+    margin-bottom: 18px;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-copy {
+    margin-top: 10px;
+    text-align: center;
+    white-space: collapse;
+  }
+
+  .footer-socials {
+    order: -1;
+  }
 }
