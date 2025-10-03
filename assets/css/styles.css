@@ -9,6 +9,12 @@
   --bg: #0b0b0b;
   --card-radius: 14px;
   --card-width: 260px;
+
+  /* motion tokens */
+  --motion-ease: cubic-bezier(.2,.9,.3,1);
+  --motion-fast: 260ms;
+  --motion-medium: 600ms;
+  --motion-slow: 900ms;
 }
 
 * {
@@ -25,6 +31,20 @@ body {
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth; /* smooth anchor navigation */
+}
+
+/* small scroll progress bar (top) */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(212,161,93,0.95), rgba(255,255,255,0.9));
+  z-index: 1200;
+  transition: width 120ms linear;
+  pointer-events: none;
 }
 
 /* =======================================================
@@ -54,6 +74,7 @@ body {
   background: url("../images/Hero.jpg") no-repeat 30% center / cover;
   overflow: hidden;
   padding-top: var(--nav-h); /* keeps content visible under fixed navbar */
+  will-change: background-position;
 }
 
 .site-hero::before {
@@ -69,13 +90,12 @@ body {
     rgba(3, 3, 3, 0.06) 100%
   );
   z-index: 0;
+  pointer-events: none;
+  transition: transform var(--motion-slow) var(--motion-ease);
 }
 
 /* =======================================================
    NAVBAR (UPDATED)
-   - Logo left, links right
-   - Transparent at top, applies .scrolled when user scrolls
-   - Fixed to top so it "segue" o utilizador
 ======================================================= */
 .navbar {
   position: fixed;
@@ -89,7 +109,7 @@ body {
   justify-content: center; /* centers inner wrapper */
   padding: 0 18px;
   height: var(--nav-h);
-  transition: background 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+  transition: background var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease);
   background: transparent; /* at top it's transparent */
 }
 
@@ -103,10 +123,7 @@ body {
   gap: 18px;
 }
 
-/* ---------------------------
-   Minimal rounded "pill" when scrolled
-   - keep outer .navbar transparent; style inner wrapper
----------------------------- */
+/* Minimal rounded "pill" when scrolled */
 .navbar.scrolled {
   transform: translateY(5px);
   margin-top: 5px;
@@ -124,7 +141,7 @@ body {
   padding: 8px 14px;                             /* inner padding for pill */
   border-radius: 14px;                           /* rounded pill corners */
   box-shadow: 0 6px 20px rgba(0,0,0,0.32);       /* subtle elevation */
-  transition: background 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+  transition: background var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease), transform var(--motion-fast) var(--motion-ease);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -136,7 +153,8 @@ body {
 }
 .navbar.scrolled .logo-link img {
   transform: scale(0.99);
-  transition: transform 200ms ease;
+  transition: transform 200ms ease, opacity 200ms ease;
+  opacity: 0.98;
 }
 
 /* fallback (no blur support) — increases opacity so pill remains visible */
@@ -198,7 +216,6 @@ body {
   width: 100%;
 }
 
-
 /* mobile toggle (FontAwesome icon) */
 .menu-toggle {
   display: none;
@@ -237,7 +254,7 @@ body {
 }
 
 /* =======================================================
-   MOBILE OFFCANVAS (keeps previous behaviour)
+   MOBILE OFFCANVAS
 ======================================================= */
 .mobile-menu {
   position: fixed;
@@ -328,36 +345,32 @@ body {
 /* =======================================================
    HERO CONTENT
 ======================================================= */
-.vertical-text {
-  position: absolute;
-  left: 100px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 120px;
-  font-weight: 700;
-  letter-spacing: 6px;
-  color: rgba(255, 255, 255, 0.06);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  z-index: 2;
-  pointer-events: none;
-  font-family: "Bebas Neue", sans-serif;
-}
+
 
 .hero-content {
   position: relative;
   z-index: 5;
-  max-width: 620px;
-  margin: 120px 8% 120px auto;
+  max-width: 1350px;        
+  margin: 120px auto;       
   padding: 12px 18px;
-  text-align: right;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: start;    
+  text-align: left;        
+  will-change: transform, opacity;
+}
+
+.hero-content > * {
+  max-width: 620px;
+  width: 100%;
 }
 
 .kicker { font-family:"Great Vibes",cursive; font-size:34px; color: rgba(212,161,93,0.95); margin-bottom:8px; letter-spacing:1px; }
-.hero-title { font-size: clamp(36px, 6vw, 84px); line-height:0.95; margin-bottom:14px; font-weight:800; color:#fff; text-transform:uppercase; text-align:right; text-shadow:0 6px 28px rgba(0,0,0,0.6); }
+.hero-title { font-size: clamp(36px, 6vw, 84px); line-height:0.95; margin-bottom:14px; font-weight:800; color:#fff; text-transform:uppercase; text-align:left; text-shadow:0 6px 28px rgba(0,0,0,0.6); }
 .hero-title .accent{ color:#fff; }
-.hero-sub { font-size:16px; color: rgba(255,255,255,0.9); margin-bottom:22px; text-align:right; }
-.hero-actions{ display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap; }
+.hero-sub { font-size:16px; color: rgba(255,255,255,0.9); margin-bottom:22px; text-align:left; }
+.hero-actions{ display:flex; gap:12px; justify-content:start; flex-wrap:wrap; }
 .btn{ padding:10px 18px; border-radius:28px; font-weight:700; text-decoration:none; display:inline-block; }
 .btn-primary{ background:var(--accent); color:#fff; }
 .btn-ghost{ background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.12); }
@@ -379,11 +392,26 @@ body {
 .about-right img { max-width: 400px; width: 100%; border-radius: 12px; }
 
 /* =======================================================
+   SERVICES
+======================================================= */
+.services { width: 100%; background: #111; padding: 60px 0 80px; box-sizing: border-box; }
+.sercices-content { display:flex; justify-content:center; align-items:center; margin-bottom: 28px; }
+.sercices-content h1 { font-size: 44px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; font-family: "Poppins", sans-serif; color: #fff; }
+.cards-wrapper { max-width: 1120px; margin: 0 auto; display: flex; gap: 28px; justify-content: center; align-items: stretch; padding: 0 18px; box-sizing: border-box; }
+.card { flex: 0 1 var(--card-width); width: var(--card-width); background: var(--accent); border-radius: var(--card-radius); box-shadow: 0 8px 30px rgba(0,0,0,0.45); overflow: hidden; display: flex; align-items: stretch; transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.55); }
+.card-content { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; padding: 22px; color: #fff; width: 100%; box-sizing: border-box; }
+.icon { display:flex; justify-content:center; align-items:center; margin-bottom:2px; color:#fff; }
+.icon img { width:70px; height:70px; display:block; stroke:#fff; fill:none; }
+.card h4 { margin: 0; font-size: 18px; font-weight: 700; font-family: "Poppins", sans-serif; color: #fff; text-align: left; }
+.card .desc { margin: 0; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.9); text-align: center; max-width: 100%; }
+
+/* =======================================================
    TEAM
 ======================================================= */
 .Team { background: #fff; padding: 50px 0; color: #111; }
 .team-inner { text-align: center; }
-.team-inner h1 { font-size: 2.5em; margin-bottom: 20px; color: #333; }
+.team-inner h1 {text-transform: uppercase; font-size: 2.5em; margin-bottom: 20px; color: #333; }
 .team-inner p { font-size: 1.1em; margin-bottom: 40px; color: #666; }
 .team-row { display: flex; justify-content: center; }
 .team-members { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
@@ -398,187 +426,51 @@ body {
 .member img { position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; object-fit: cover; }
 
 /* =======================================================
-   SERVICES
+   GALLERY
 ======================================================= */
-.services { width: 100%; background: #111; padding: 60px 0 80px; box-sizing: border-box; }
-.sercices-content { display:flex; justify-content:center; align-items:center; margin-bottom: 28px; }
-.sercices-content h1 { font-size: 44px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; font-family: "Poppins", sans-serif; color: #fff; }
 
- /* Cards wrapper */
-.cards-wrapper { max-width: 1120px; margin: 0 auto; display: flex; gap: 28px; justify-content: center; align-items: stretch; padding: 0 18px; box-sizing: border-box; }
+.Gallery {background-color: #f1ede7; color: #111; padding: 50px 0;}
+.Gallery-inner {text-align: center; align-items: center; justify-content: center;}
+.Gallery-inner h1 {text-transform: uppercase; font-size: 2.5em; margin-bottom: 40px; color: #000; }
+.Gallery-inner p { font-size: 1.1em; margin-bottom: 40px; color: #666;}
+.Gallery-Struct{display: flex; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 20px;}
+.Gallery-Image {width: 250px; height: 300px; cursor: pointer; margin: 10px; transition: 400ms; display:block; border-radius: 8px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08);}
+.Gallery-Image:hover {filter: grayscale(1); transform: scale(1.03);}
+#insta{margin-right: 10px;}
 
- /* Card */
-.card { flex: 0 1 var(--card-width); width: var(--card-width); background: var(--accent); border-radius: var(--card-radius); box-shadow: 0 8px 30px rgba(0,0,0,0.45); overflow: hidden; display: flex; align-items: stretch; transition: transform 0.18s ease, box-shadow 0.18s ease; }
-.card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.55); }
+/* =======================================================
+   FOOTER
+======================================================= */
 
-.card-content { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; padding: 22px; color: #fff; width: 100%; box-sizing: border-box; }
-.icon { display:flex; justify-content:center; align-items:center; margin-bottom:2px; color:#fff; }
-.icon img { width:70px; height:70px; display:block; stroke:#fff; fill:none; }
-.card h4 { margin: 0; font-size: 18px; font-weight: 700; font-family: "Poppins", sans-serif; color: #fff; text-align: left; }
-.card .desc { margin: 0; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.9); text-align: center; max-width: 100%; }
-
-
-
-/* ===== Footer: 3 colunas + bottom strip ===== */
-.site-footer {
-  background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(2,2,2,0.98));
-  color: #e6e6e6;
-  border-top: 1px solid rgba(255,255,255,0.03);
-  padding-top: 36px;
-  padding-bottom: 0;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
-  align-items: start;
-  padding-bottom: 28px;
-}
-
-/* Colunas */
-.footer-col h4 {
-  font-size: 1.1rem;
-  margin-bottom: 16px;
-  color: #fff;
-  letter-spacing: 0.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.footer-logo {
-  width: 120px;
-  height: auto;
-  display: block;
-  position: relative;
-  top: -35px;
-}
-
-/* Mapa pequeno */
-.footer-map {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  top: -40px;
-  align-items: flex-start;
-}
-
-.map-iframe {
-  width: 240px;
-  height: 140px;
-  border: 0;
-  border-radius: 12px;
-  transition: transform 0.2s ease;
-  filter: grayscale(100%) invert(92%) contrast(83%);
-}
-
-.map-iframe:hover {
-  transform: scale(1.02);
-}
-
-.map-link {
-  font-size: 0.95rem;
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 600;
-  transition: color 0.15s ease;
-}
-
-.map-link:hover {
-  color: #fff;
-}
-
+.site-footer {background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(2,2,2,0.98)); color: #e6e6e6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 36px; padding-bottom: 0;}
+.footer-grid {display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; align-items: start;padding-bottom: 28px;}
+.footer-col h4 { font-size: 1.1rem; margin-bottom: 16px; color: #fff; letter-spacing: 0.5px; font-weight: 700; text-transform: uppercase;}
+.footer-logo { width: 120px; height: auto; display: block; position: relative; top: -35px;}
+.footer-map { display: flex; flex-direction: column; gap: 10px; position: relative; top: -40px; align-items: flex-start;}
+.map-iframe { width: 240px; height: 140px; border: 0; border-radius: 12px; transition: transform 0.2s ease; filter: grayscale(100%) invert(92%) contrast(83%); }
+.map-iframe:hover { transform: scale(1.02); }
+.map-link { font-size: 0.95rem; text-decoration: none; color: var(--accent); font-weight: 600; transition: color 0.15s ease;}
+.map-link:hover {color: #fff;}
 #footer-menu-title {color: var(--accent);}
 #footer-hours-title {color: var(--accent);}
-
-/* Menu simples */
-.footer-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 10px;
-}
-.footer-menu a {
-  color: rgba(255,255,255,0.92);
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 14px;
-  transition: color 0.15s ease;
-}
-.footer-menu a:hover {
-  color: var(--accent);
-}
-
-/* Horário + botão */
-.footer-hours {
-  color: #d6d6d6;
-  margin-top: 10px;
-  margin-bottom: 16px;
-  line-height: 1.5;
-  font-size: 14px;
-  font-weight: 400;
-}
-.footer-cta {
-  margin-top: 10px;
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 800;
-  background: var(--accent);
-  color: #fff;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.footer-cta:hover {
-  background: #c18f4c;
-  transform: translateY(-2px);
-}
-
-/* tira inferior */
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.04);
-  margin-top: 24px;
-  padding: 14px 0;
-  background: rgba(0,0,0,0.03);
-}
-
-.footer-bottom-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 8px 0;
-}
-
-/* socials */
-.footer-socials a {
-  display: inline-flex;
-  width: 42px;
-  height: 42px;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: #fff;
-  opacity: 0.95;
-  transition: color 0.15s ease, transform 0.15s ease;
-}
+#footer-number {margin-bottom: 10px; color: var(--accent);}
+.footer-menu {list-style: none; padding: 0; margin: 0; display: grid; gap: 10px;}
+.footer-menu a { color: rgba(255,255,255,0.92); text-decoration: none; font-weight: 400; font-size: 14px; transition: color 0.15s ease;}
+.footer-menu a:hover { color: var(--accent);}
+.footer-hours {color: #d6d6d6; margin-top: 10px; margin-bottom: 16px; line-height: 1.5; font-size: 14px; font-weight: 400;}
+.footer-right a {color: inherit; text-decoration: none;}
+.footer-cta {margin-top: 10px; display: inline-block; padding: 12px 20px; border-radius: 10px; text-decoration: none; font-weight: 800; background: var(--accent); color: #fff; transition: background 0.2s ease, transform 0.2s ease;}
+.footer-cta:hover {background: #c18f4c; transform: translateY(-2px);}
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.04); margin-top: 24px; padding: 14px 0; background: rgba(0,0,0,0.03);}
+.footer-bottom-inner {display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 8px 0;}
+.footer-socials a { display: inline-flex; width: 42px; height: 42px; align-items: center; justify-content: center; margin-right: 10px; border-radius: 10px; text-decoration: none; color: #fff; opacity: 0.95; transition: color 0.15s ease, transform 0.15s ease;}
 .footer-socials a i { font-size: 1.1rem; }
 .footer-socials a:hover { color: var(--accent); transform: translateY(-3px); }
+.footer-copy { color: #bdbdbd; font-size: 0.95rem; text-align: right; white-space: nowrap;}
 
-/* copyright */
-.footer-copy {
-  color: #bdbdbd;
-  font-size: 0.95rem;
-  text-align: right;
-  white-space: nowrap;
-}
-
-
+/* =======================================================
+   RESPONSIVE
+======================================================= */
 @media (max-width: 1000px) {
   /* HERO */
   .hero-content { 
@@ -605,10 +497,7 @@ body {
     justify-content: center; 
     flex-wrap: wrap; 
   }
-  .vertical-text { 
-    display: none; 
-  }
-  .site-hero{
+    .site-hero{
     background-position: 50%;
   }
   .site-hero::before { 
@@ -690,8 +579,62 @@ body {
   }
   .sercices-content { margin-bottom: 16px; }
   .sercices-content h1 { font-size: 28px; }
+  .team-inner h1 {font-size: 28px;}
+  .team-inner p {font-size: 15px;}
+  .Gallery h1 {font-size: 28px;}
 
+  .Gallery {
+    padding: 28px 12px;
+  }
 
+  .Gallery-inner {
+    padding: 0 8px;
+  }
+
+  /* 3 colunas responsivas (3x3 quando houver >=9 itens) */
+  .Gallery-Struct {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    justify-items: center;
+    align-items: start;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .Gallery-Image {
+    width: 100%;
+    max-width: 260px;         
+    height: auto;             
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    transition: transform 400ms ease, filter 400ms ease, opacity 200ms ease;
+    display: block;
+    object-fit: cover;        /* preencha o caixa sem distorcer */
+  }
+
+  .Gallery-Image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .Gallery-Image:hover {
+    transform: scale(1.03);
+    filter: grayscale(0);
+  }
+
+  .Gallery-inner h1,
+  .Gallery-inner p {
+    text-align: center;
+    padding: 0 8px;
+  }
+
+  /* Footer responsive */
   .footer-grid {margin-top: 10px;
     grid-template-columns: 1fr;
     gap: 28px;
@@ -715,6 +658,7 @@ body {
   }
   #footer-menu-title {font-size: 24px;}
   #footer-hours-title {font-size: 24px;}
+  #footer-number {margin-bottom: 20px;}
 
   .footer-menu {
     justify-content: center;
@@ -741,3 +685,72 @@ body {
     order: -1;
   }
 }
+
+/* =======================================================
+   SCROLL / REVEAL ANIMATIONS (NEW)
+   - Uses small transitions and IntersectionObserver to animate
+     elements entering the viewport.
+======================================================= */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--motion-medium) var(--motion-ease), transform var(--motion-medium) var(--motion-ease);
+  will-change: opacity, transform;
+}
+
+/* directional helpers (initial state) */
+.reveal-from-left { transform: translateX(-26px); }
+.reveal-from-right { transform: translateX(26px); }
+.reveal-from-up { transform: translateY(26px); }
+
+/* visible state */
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* subtle scale for gallery images */
+.Gallery-Image.scroll-reveal {
+  opacity: 0;
+  transform: scale(0.98) translateY(10px);
+  transition: opacity var(--motion-medium) var(--motion-ease), transform var(--motion-medium) var(--motion-ease);
+}
+.Gallery-Image.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* team member reveal with slight rotate */
+.member.scroll-reveal {
+  transform-origin: 50% 50%;
+  transition: transform var(--motion-medium) var(--motion-ease), opacity var(--motion-medium) var(--motion-ease);
+}
+.member.scroll-reveal.is-visible {
+  transform: translateY(0) rotate(0.001deg); /* avoids some subpixel bugs */
+  opacity: 1;
+}
+
+/* hero content appear stronger */
+.hero-content.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.995);
+  transition: opacity var(--motion-slow) var(--motion-ease), transform var(--motion-slow) var(--motion-ease);
+}
+.hero-content.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* subtle focus glow for interactive elements when they appear */
+.btn.scroll-reveal.is-visible {
+  box-shadow: 0 10px 30px rgba(212,161,93,0.09);
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger helpers (JS will set inline style transition-delay) */
+[data-stagger] > * {
+  will-change: opacity, transform;
+}
+
+/* END SCROLL / REVEAL SECTION */

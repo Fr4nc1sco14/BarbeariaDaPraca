@@ -18,6 +18,9 @@
     <link rel="icon" href="assets/images/Logo.png">
   </head>
   <body>
+    <!-- small progress bar -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
     <!-- Header + Hero -->
     <header class="site-hero" role="banner" aria-label="Hero com background">
       <!-- NAVBAR (reformulada) -->
@@ -70,10 +73,10 @@
       </div>
 
       <!-- Vertical watermark text left -->
-      <div class="vertical-text" aria-hidden="true">BARBEARIA</div>
+      
 
       <!-- Hero content (right) -->
-      <div class="hero-content" role="region" aria-label="Conteúdo principal">
+      <div class="hero-content scroll-reveal" role="region" aria-label="Conteúdo principal">
         <div class="kicker">Bem-vindo à Barbearia da Praça</div>
         <h1 class="hero-title">
           ESTILO<br />QUE <span class="accent">TE DIFERENCIA!</span>
@@ -82,303 +85,559 @@
           Serviço de primeira qualidade por barbeiros profissionais.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#">MARQUE JÁ</a>
-          <a class="btn btn-ghost" href="#services">SERVIÇOS</a>
+          <a class="btn btn-primary scroll-reveal" href="#">MARQUE JÁ</a>
+          <a class="btn btn-ghost scroll-reveal" href="tel:+351961352161">LIGAR AGORA</a>
         </div>
       </div>
     </header>
 
-    <section class="about-us">
-      <div class="container about-inner">
-        <div class="about-left">
-        <h1 id="abouttitle">PORQUE ESCOLHER A <span>BARBEARIA DA PRAÇA?</span></h1>
-        <p>
-          Os nossos barbeiros especialistas dominam cortes clássicos, modernos e personalizados para todos os tipos e texturas de cabelo. 
-          Seja um estilo intemporal ou a última tendência, garantimos que ficará sempre impecável.
-        </p>
-        <div class="stats">
-          <div class="stat1">
-            <h1>99<span>%</span></h1>
-            <h3>Satisfação dos Clientes</h3>
+    <main>
+      <section class="about-us">
+        <div class="container about-inner">
+          <div class="about-left scroll-reveal reveal-from-left">
+            <h1 id="abouttitle">PORQUE ESCOLHER A <span>BARBEARIA DA PRAÇA?</span></h1>
+            <p>
+              Os nossos barbeiros especialistas dominam cortes clássicos, modernos e personalizados para todos os tipos e texturas de cabelo. 
+              Seja um estilo intemporal ou a última tendência, garantimos que ficará sempre impecável.
+            </p>
+            <div class="stats">
+              <div class="stat1">
+                <h1>99<span>%</span></h1>
+                <h3>Satisfação dos Clientes</h3>
+              </div>
+              <div class="stat2">
+                <h1>10<span>+</span></h1>
+                <h3>Anos de Experiência</h3>
+              </div>
+            </div>
           </div>
-          <div class="stat2">
-            <h1>10<span>+</span></h1>
-            <h3>Anos de Experiência</h3>
+          <div class="about-right scroll-reveal reveal-from-right">
+            <img src="assets/images/ABOUTUS.jpg" alt="Sobre Nós">
           </div>
         </div>
+      </section>
+
+      <section id="services" class="services">
+        <div class="container sercices-content">
+          <h1 class="scroll-reveal">Os Nossos Serviços</h1>
         </div>
-        <div class="about-right">
-          <img src="assets/images/ABOUTUS.jpg" alt="Sobre Nós">
+
+        <div class="container cards-wrapper" data-stagger>
+          <!-- Card 1 -->
+          <article class="card scroll-reveal">
+            <div class="card-content">
+              <div class="icon" aria-hidden="true">
+                <img src="assets/images/card1.png" alt="Corte de Cabelo" />
+              </div>
+              <h4>Cortes de Cabelo</h4>
+              <p class="desc">Cortes clássicos e modernos adaptados ao seu estilo.</p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card scroll-reveal">
+            <div class="card-content">
+              <div class="icon" aria-hidden="true">
+                <img src="assets/images/card2.png" alt="Aparar Barba" />
+              </div>
+              <h4>Aparar Barba</h4>
+              <p class="desc">Barbas perfeitamente modeladas e acabamentos suaves.</p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card scroll-reveal">
+            <div class="card-content">
+              <div class="icon" aria-hidden="true">
+                <img src="assets/images/card3.png" alt="Barbear com Toalha" />
+              </div>
+              <h4>Barbear com Toalha</h4>
+              <p class="desc">Experiência premium para um acabamento ultra-suave.</p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card scroll-reveal">
+            <div class="card-content">
+              <div class="icon" aria-hidden="true">
+                <img src="assets/images/card4.png" alt="Coloração de Cabelo" />
+              </div>
+              <h4>Coloração de Cabelo</h4>
+              <p class="desc">Obtenha uma nova cor ousada ou realce a sua cor natural.</p>
+            </div>
+          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="services" class="services">
-      <div class="container sercices-content">
-        <h1>Os Nossos Serviços</h1>
-      </div>
-
-      <div class="container cards-wrapper">
-        <!-- Card 1 -->
-        <article class="card">
-          <div class="card-content">
-            <div class="icon" aria-hidden="true">
-              <img src="assets/images/card1.png" alt="Corte de Cabelo" />
-            </div>
-            <h4>Cortes de Cabelo</h4>
-            <p class="desc">Cortes clássicos e modernos adaptados ao seu estilo.</p>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="card">
-          <div class="card-content">
-            <div class="icon" aria-hidden="true">
-              <img src="assets/images/card2.png" alt="Aparar Barba" />
-            </div>
-            <h4>Aparar Barba</h4>
-            <p class="desc">Barbas perfeitamente modeladas e acabamentos suaves.</p>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="card">
-          <div class="card-content">
-            <div class="icon" aria-hidden="true">
-              <img src="assets/images/card3.png" alt="Barbear com Toalha" />
-            </div>
-            <h4>Barbear com Toalha</h4>
-            <p class="desc">Experiência premium para um acabamento ultra-suave.</p>
-          </div>
-        </article>
-
-        <!-- Card 4 -->
-        <article class="card">
-          <div class="card-content">
-            <div class="icon" aria-hidden="true">
-              <img src="assets/images/card4.png" alt="Coloração de Cabelo" />
-            </div>
-            <h4>Coloração de Cabelo</h4>
-            <p class="desc">Obtenha uma nova cor ousada ou realce a sua cor natural.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="team" class="Team">
-      <div class="container team-inner">
-        <h1>Conheça a nossa equipa de especialistas</h1>
-        <p>Cada membro da nossa equipe está comprometido em proporcionar uma experiência de higiene excepcional,
-           garantindo que você saia da nossa loja se sentindo impecável e no seu melhor.
-        </p>
-        <div class="team-row">
-          <div class="team-members">
-            <div class="member">
-              <div class="name-bubble">
-                <span>Bruno Carvalho</span>
-                <span>Master Barber</span>
+      <section id="team" class="Team">
+        <div class="container team-inner">
+          <h1 class="scroll-reveal">Conheça a nossa equipa de especialistas</h1>
+          <p class="scroll-reveal">Cada membro da nossa equipe está comprometido em proporcionar uma experiência de higiene excepcional,
+             garantindo que você saia da nossa loja se sentindo impecável e no seu melhor.
+          </p>
+          <div class="team-row">
+            <div class="team-members" data-stagger>
+              <div class="member scroll-reveal">
+                <div class="name-bubble">
+                  <span>Bruno Carvalho</span>
+                  <span>Master Barber</span>
+                </div>
+                <div class="social-member">
+                  <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </div>
+                <img src="assets/images/TeamCard1.png" alt="Bruno Carvalho">
               </div>
-              <div class="social-member">
-                <i class="fa-brands fa-instagram"></i>
+              <div class="member scroll-reveal">
+                <div class="name-bubble">
+                  <span>Rafael Gonçalves</span>
+                  <span>Junior Barber</span>
+                </div>
+                <div class="social-member">
+                  <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </div>
+                <img src="assets/images/master.png" alt="Rafael Gonçalves">
               </div>
-              <img src="assets/images/TeamCard1.png" alt="PESSOA1">
-            </div>
-            <div class="member">
-              <div class="name-bubble">
-                <span>Rafael Gonçalves</span>
-                <span>Junior Barber</span>
-              </div>
-              <div class="social-member">
-                <i class="fa-brands fa-instagram"></i>
-              </div>
-              <img src="assets/images/master.png" alt="PESSOA1">
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-
+      <section id="gallery" class="Gallery">
+        <div class="container Gallery-inner">
+          <h1 class="scroll-reveal">A Nossa Galeria</h1>
+          <div class="Gallery-Struct" data-stagger>
+            <img src="assets/images/Cut1.jpg" alt="CORTE DE CABELO N1" class="Gallery-Image scroll-reveal">
+            <img src="assets/images/Cut2.jpg" alt="CORTE DE CABELO N2" class="Gallery-Image scroll-reveal">
+            <img src="assets/images/Cut3.jpg" alt="CORTE DE CABELO N3" class="Gallery-Image scroll-reveal">
+            <img src="assets/images/Cut4.jpg" alt="CORTE DE CABELO N4" class="Gallery-Image scroll-reveal">
+            <img src="assets/images/Cut5.jpg" alt="CORTE DE CABELO N5" class="Gallery-Image scroll-reveal">
+            <img src="assets/images/Cut6.jpg" alt="CORTE DE CABELO N6" class="Gallery-Image scroll-reveal">
+          </div>
+            <a class="btn btn-primary" id="btn-Gallery" href="https://www.instagram.com/barbearia_da_praca_pvl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-instagram" id="insta"></i> Siga-nos no Instagram
+            </a>
+        </div>
+      </section>
+    </main>
 
     <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
-  <div class="container footer-grid" role="region" aria-label="Informações de rodapé">
-    <!-- COLUNA 1: Logo + Mapa -->
-    <div class="footer-col footer-left">
-      <img src="assets/images/Logo.png" alt="Barbearia da Praça — Logo" class="footer-logo" />
+      <div class="container footer-grid" role="region" aria-label="Informações de rodapé">
+        <!-- COLUNA 1: Logo + Mapa -->
+        <div class="footer-col footer-left">
+          <img src="assets/images/Logo.png" alt="Barbearia da Praça — Logo" class="footer-logo" />
 
-      <!-- MAPA: Iframe atualizado -->
-      <div class="footer-map" aria-hidden="false">
-        <iframe 
-          class="map-iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d263.1444216823397!2d-8.270961189517692!3d41.5759141101727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24e36b5531f899%3A0xff33d3867fedfc6e!2sBarbearia%20da%20pra%C3%A7a!5e1!3m2!1spt-PT!2spt!4v1759409417312!5m2!1spt-PT!2spt" 
-          width="600" 
-          height="450" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Mapa: Barbearia da Praça"
-          aria-label="Mapa do local da barbearia">
-        </iframe>
-      </div>
-    </div>
+          <!-- MAPA: Iframe atualizado -->
+          <div class="footer-map" aria-hidden="false">
+            <iframe 
+              class="map-iframe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d263.1444216823397!2d-8.270961189517692!3d41.5759141101727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24e36b5531f899%3A0xff33d3867fedfc6e!2sBarbearia%20da%20pra%C3%A7a!5e1!3m2!1spt-PT!2spt!4v1759409417312!5m2!1spt-PT!2spt" 
+              width="600" 
+              height="450" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mapa: Barbearia da Praça"
+              aria-label="Mapa do local da barbearia">
+            </iframe>
+          </div>
+        </div>
 
+        <!-- COLUNA 2: Menu -->
+        <div class="footer-col footer-center" aria-labelledby="footer-menu-title">
+          <h4 id="footer-menu-title">Menu</h4>
+          <ul class="footer-menu" role="list">
+            <li><a href="#">Início</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#team">Equipa</a></li>
+            <li><a href="#gallery">Galeria</a></li>
+            <li><a href="#book" class="footer-book-link">Marcar Agora</a></li>
+          </ul>
+        </div>
 
-    <!-- COLUNA 2: Menu -->
-    <div class="footer-col footer-center" aria-labelledby="footer-menu-title">
-      <h4 id="footer-menu-title">Menu</h4>
-      <ul class="footer-menu" role="list">
-        <li><a href="#">Início</a></li>
-        <li><a href="#services">Serviços</a></li>
-        <li><a href="#team">Equipa</a></li>
-        <li><a href="#gallery">Galeria</a></li>
-        <!-- opcional: link directo para marcar -->
-        <li><a href="#book" class="footer-book-link">Marcar Agora</a></li>
-      </ul>
-    </div>
+        <!-- COLUNA 3: Horário + Reservar -->
+        <div class="footer-col footer-right" aria-labelledby="footer-hours-title">
+          <h4 id="footer-hours-title">Horário e Contacto</h4>
+          <p class="footer-hours">
+            Seg, Qua, Qui, Sex: 09:00 — 12:00 / 14:00 19:00<br />
+            Sáb: 09:00 — 12:00 / 14:00 17:00<br />
+            Ter, Dom: Fechado
+          </p>
+          <p id="footer-number"><a href="tel:+351961352161">+351 961 352 161</a></p>
 
-    <!-- COLUNA 3: Horário + Reservar -->
-    <div class="footer-col footer-right" aria-labelledby="footer-hours-title">
-      <h4 id="footer-hours-title">Horário</h4>
-      <p class="footer-hours">
-        Seg, Qua, Qui, Sex: 09:00 — 19:00<br />
-        Sáb: 09:00 — 13:00<br />
-        Ter, Dom: Fechado
-      </p>
-
-
-      <a class="btn btn-primary footer-cta" href="#book" role="button" aria-label="Reservar agora">Reservar Agora</a>
-    </div>
-  </div>
-
-  <!-- TIRA INFERIOR: redes sociais (esq) + copyright (dir) -->
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
-      <div class="footer-socials" aria-label="Redes sociais">
-        <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a class="btn btn-primary footer-cta" href="#book" role="button" aria-label="Reservar agora">Reservar Agora</a>
+        </div>
       </div>
 
-      <div class="footer-copy" aria-label="Informação de direitos">
-        Copyright © BARBEARIA DA PRAÇA. All Rights Reserved. | SiteLab
+      <div class="footer-bottom">
+        <div class="container footer-bottom-inner">
+          <div class="footer-socials" aria-label="Redes sociais">
+            <a aria-label="Instagram" href="https://www.instagram.com/barbearia_da_praca_pvl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a aria-label="Facebook" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a aria-label="LinkedIn" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+
+          <div class="footer-copy" aria-label="Informação de direitos">
+            Copyright © BARBEARIA DA PRAÇA. All Rights Reserved. | SiteLab
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 
-
-    <!-- --- JS: scroll behaviour + mobile toggle (apenas para navbar) --- -->
+    <!-- --- JS: scroll behaviour + mobile toggle + reveal (IntersectionObserver) --- -->
     <script>
-      (function () {
-        const navbar = document.querySelector('.navbar');
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileClose = document.getElementById('mobile-close');
+  (function () {
+    // elements
+    const navbar = document.querySelector('.navbar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+    const scrollProgress = document.getElementById('scroll-progress');
+    const siteHero = document.querySelector('.site-hero');
 
-        // Ensure initial icon/labels are consistent on load
-        function setClosedState() {
-          mobileMenu.classList.remove('open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          mobileMenu.setAttribute('aria-hidden', 'true');
+    // NAV selectors (desktop + mobile)
+    const desktopNavItems = document.querySelectorAll('.nav-links .nav-item');
+    const desktopNavLinks = document.querySelectorAll('.nav-links .nav-item a');
+    const mobileNavLinks = document.querySelectorAll('.mobile-menu a');
 
-          // hide the close button inside the mobile panel
-          if (mobileClose) {
-            mobileClose.setAttribute('aria-hidden', 'true');
-            mobileClose.style.display = 'none';
-          }
+    // Build a map of sectionId -> element we will observe
+    // Consider 'home' (header) mapped from href="#" links
+    const sectionElements = new Map();
 
-          // ensure the toggle button has the "open" label
-          menuToggle.setAttribute('aria-label', 'Abrir menu');
-        }
+    // gather sections by id that exist in the page
+    document.querySelectorAll('section[id]').forEach(sec => {
+      sectionElements.set(sec.id, sec);
+    });
+    // add hero as 'home' target (for links with href="#")
+    if (siteHero) {
+      sectionElements.set('home', siteHero);
+    }
 
-        // Scroll handler: add/remove .scrolled
-        function onScroll() {
-          if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
-          } else {
-            navbar.classList.remove('scrolled');
-          }
-        }
+    // Initial mobile menu state
+    function setClosedState() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      if (mobileClose) {
+        mobileClose.setAttribute('aria-hidden', 'true');
+        mobileClose.style.display = 'none';
+      }
+      menuToggle.setAttribute('aria-label', 'Abrir menu');
+    }
 
-        // Mobile toggle: open/close off-canvas and show close icon inside panel
-        function toggleMobileMenu() {
-          const isOpen = mobileMenu.classList.toggle('open');
-          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-          mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    // Navbar scrolled class
+    function onScroll() {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      // update progress
+      updateScrollProgress();
+    }
 
-          if (isOpen) {
-            // show close button inside the mobile menu
-            if (mobileClose) {
-              mobileClose.setAttribute('aria-hidden', 'false');
-              mobileClose.style.display = 'flex';
-            }
-            menuToggle.setAttribute('aria-label', 'Fechar menu');
-          } else {
-            if (mobileClose) {
-              mobileClose.setAttribute('aria-hidden', 'true');
-              mobileClose.style.display = 'none';
-            }
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-          }
-        }
+    // Update scroll progress
+    function updateScrollProgress() {
+      if (!scrollProgress) return;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0;
+      scrollProgress.style.width = pct + '%';
+    }
 
-        window.addEventListener('scroll', onScroll, { passive: true });
-        menuToggle.addEventListener('click', function (e) {
-          e.stopPropagation(); // prevent immediate outside click handler from firing
-          toggleMobileMenu();
-        });
+    // Mobile menu toggle logic
+    function toggleMobileMenu() {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
 
-        // close button inside the mobile panel
+      if (isOpen) {
         if (mobileClose) {
-          mobileClose.addEventListener('click', function (e) {
-            e.stopPropagation();
-            // close the panel
-            mobileMenu.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            mobileClose.setAttribute('aria-hidden', 'true');
-            mobileClose.style.display = 'none';
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-          });
+          mobileClose.setAttribute('aria-hidden', 'false');
+          mobileClose.style.display = 'flex';
         }
+        menuToggle.setAttribute('aria-label', 'Fechar menu');
+      } else {
+        if (mobileClose) {
+          mobileClose.setAttribute('aria-hidden', 'true');
+          mobileClose.style.display = 'none';
+        }
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
+      }
+    }
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function (e) {
-          const isClickInsideMenu = mobileMenu.contains(e.target) || menuToggle.contains(e.target);
-          if (!isClickInsideMenu && mobileMenu.classList.contains('open')) {
-            // close
-            mobileMenu.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            // hide close button inside panel
-            if (mobileClose) {
-              mobileClose.setAttribute('aria-hidden', 'true');
-              mobileClose.style.display = 'none';
-            }
-            // restore label
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-          }
-        });
+    // attach events
+    window.addEventListener('scroll', onScroll, { passive: true });
+    menuToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
 
-        // Optional: close menu with Escape key for accessibility
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-            mobileMenu.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            if (mobileClose) {
-              mobileClose.setAttribute('aria-hidden', 'true');
-              mobileClose.style.display = 'none';
-            }
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-          }
-        });
-
-        // Initial state check (in case page loaded not at top)
-        onScroll();
+    if (mobileClose) {
+      mobileClose.addEventListener('click', function (e) {
+        e.stopPropagation();
         setClosedState();
-      })();
-    </script>
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      const isClickInsideMenu = mobileMenu.contains(e.target) || menuToggle.contains(e.target);
+      if (!isClickInsideMenu && mobileMenu.classList.contains('open')) {
+        setClosedState();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        setClosedState();
+      }
+    });
+
+    // Close mobile menu when a mobile link is clicked (good UX)
+    mobileNavLinks.forEach(a => {
+      a.addEventListener('click', () => {
+        setClosedState();
+      });
+    });
+
+    // Parallax hero background (subtle). Only on wider screens for performance.
+    function heroParallax() {
+      if (!siteHero) return;
+      if (window.innerWidth < 900) {
+        siteHero.style.backgroundPosition = '';
+        return;
+      }
+      const offset = window.scrollY * 0.25;
+      // use backgroundPosition to create a gentle parallax
+      siteHero.style.backgroundPosition = `center ${offset}px`;
+    }
+    window.addEventListener('scroll', heroParallax, { passive: true });
+    window.addEventListener('resize', heroParallax);
+
+    // IntersectionObserver reveal (efficient)
+    const revealOptions = {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+
+          // If parent has data-stagger, apply stagger to children
+          const parent = el.closest('[data-stagger]');
+          if (parent) {
+            // if el is the container, stagger its immediate children
+            if (parent === el) {
+              const children = Array.from(parent.children);
+              children.forEach((child, idx) => {
+                // tiny stagger
+                child.style.transitionDelay = (idx * 80) + 'ms';
+                child.classList.add('is-visible');
+              });
+            } else {
+              // if child itself observed - reveal normally (still apply optional delay)
+              el.classList.add('is-visible');
+            }
+          } else {
+            // apply small timed delay if element had inline data-delay (not required)
+            el.classList.add('is-visible');
+          }
+          obs.unobserve(el);
+        }
+      });
+    }, revealOptions);
+
+    // Observe all targets with class .scroll-reveal
+    const revealTargets = document.querySelectorAll('.scroll-reveal');
+    revealTargets.forEach(t => {
+      // ensure initial hidden class present (CSS expects it)
+      t.classList.remove('is-visible'); // start clean
+      revealObserver.observe(t);
+    });
+
+    // Also observe containers with data-stagger so we can stagger children later
+    const staggerContainers = document.querySelectorAll('[data-stagger]');
+    staggerContainers.forEach(container => {
+      // observe the container itself (so we can stagger children when it enters)
+      revealObserver.observe(container);
+      // also ensure children are initially invisible (they likely have scroll-reveal), but enforce
+      Array.from(container.children).forEach(child => {
+        if (!child.classList.contains('is-visible')) {
+          // keep hidden, will be revealed by the container handler
+          child.classList.remove('is-visible');
+        }
+      });
+    });
+
+    // NAVIGATION HIGHLIGHT ON SCROLL
+    // --------------------------------
+    // Logic: usar IntersectionObserver para marcar o item de nav activo
+    // Mapeia anchors com href="#id" para os elementos observados.
+    // fallback: se um target não existir (ex: #book) será ignorado.
+
+    // Helper: extrai id do href (#services -> services), '#' -> 'home'
+    function idFromHref(href) {
+      if (!href) return null;
+      // remove query/hash extras e só pega a parte do hash
+      const hashIndex = href.indexOf('#');
+      if (hashIndex === -1) return null;
+      const raw = href.slice(hashIndex + 1);
+      if (raw === '') return 'home';
+      // strip possible leading slashes or spaces
+      return raw.replace(/^\/+/, '').trim();
+    }
+
+    // Remove 'active' de todos os desktop nav items
+    function clearDesktopActive() {
+      desktopNavItems.forEach(li => li.classList.remove('active'));
+    }
+
+    // Clear mobile active states (if we want to reflect on mobile menu)
+    function clearMobileActive() {
+      mobileNavLinks.forEach(a => a.classList.remove('active'));
+    }
+
+    // Set active classes in both desktop and mobile (if match found)
+    function setActiveForId(id) {
+      clearDesktopActive();
+      clearMobileActive();
+
+      // desktop: find link whose href matches '#id' or '#' for home
+      desktopNavLinks.forEach(a => {
+        const targetId = idFromHref(a.getAttribute('href'));
+        if (targetId === id) {
+          const li = a.closest('.nav-item');
+          if (li) li.classList.add('active');
+        }
+      });
+
+      // mobile: add a simple 'active' class on the anchor for visual feedback
+      mobileNavLinks.forEach(a => {
+        const targetId = idFromHref(a.getAttribute('href'));
+        if (targetId === id) {
+          a.classList.add('active');
+        }
+      });
+    }
+
+    // Build an IntersectionObserver that watches the sections and sets active
+    const navObserverOptions = {
+      root: null,
+      threshold: 0.45, // quando ~45% da secção estiver visível consideramos "activa"
+      rootMargin: '0px 0px -10% 0px' // ligeiro offset para ativar um pouco antes
+    };
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // find which observed id this element corresponds to
+          let matchedId = null;
+          // compare by identity (values stored in sectionElements)
+          sectionElements.forEach((el, key) => {
+            if (el === entry.target) matchedId = key;
+          });
+          if (matchedId) {
+            setActiveForId(matchedId);
+          }
+        }
+      });
+    }, navObserverOptions);
+
+    // Observe each available section element
+    sectionElements.forEach((el, id) => {
+      // Observe only if element exists in DOM (it does)
+      if (el) navObserver.observe(el);
+    });
+
+    // Fallback to update active based on scroll position (in case observer misses)
+    // picks the section whose top is closest to the top-of-viewport but not far above
+    function updateActiveByScrollFallback() {
+      let bestId = null;
+      let bestDistance = Infinity;
+      const viewportMiddle = window.innerHeight * 0.25; // prefer sections near top quarter
+
+      sectionElements.forEach((el, id) => {
+        const rect = el.getBoundingClientRect();
+        // compute distance from top quarter
+        const dist = Math.abs(rect.top - viewportMiddle);
+        // prefer sections that are at least partially visible
+        if (rect.bottom > 50 && rect.top < window.innerHeight - 50) {
+          if (dist < bestDistance) {
+            bestDistance = dist;
+            bestId = id;
+          }
+        }
+      });
+
+      if (bestId) {
+        setActiveForId(bestId);
+      }
+    }
+
+    // also update on resize / load to ensure correct state when page loads at scrolled position
+    window.addEventListener('resize', updateActiveByScrollFallback);
+    window.addEventListener('load', function () {
+      updateScrollProgress();
+      heroParallax();
+      // small timeout to allow layout; then run fallback
+      setTimeout(() => {
+        updateActiveByScrollFallback();
+
+        // manual check: if an element's top is < viewport, mark visible (reveal fallback)
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9) {
+            el.classList.add('is-visible');
+          }
+        });
+      }, 120);
+    });
+
+    // If user changes hash (e.g., clicks link), ensure active updates immediately
+    window.addEventListener('hashchange', () => {
+      const currentHash = location.hash.replace('#', '') || 'home';
+      setActiveForId(currentHash);
+    });
+
+    // Also update active when user clicks any nav link (instant feedback)
+    // Desktop links
+    desktopNavLinks.forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = idFromHref(a.getAttribute('href'));
+        if (id && sectionElements.has(id)) {
+          // let the browser scroll naturally; but also set active immediately
+          setActiveForId(id);
+        } else if (id === 'home') {
+          setActiveForId('home');
+        } else {
+          // no matching section (e.g., #book) -> clear selection
+          clearDesktopActive();
+        }
+      });
+    });
+    // Mobile links already close the menu above; also apply active on click
+    mobileNavLinks.forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = idFromHref(a.getAttribute('href'));
+        if (id && sectionElements.has(id)) {
+          setActiveForId(id);
+        } else if (id === 'home') {
+          setActiveForId('home');
+        } else {
+          clearMobileActive();
+        }
+      });
+    });
+
+    // In case some elements are already in view on load, force check
+    // Start states
+    onScroll();
+    setClosedState();
+  })();
+</script>
+
   </body>
 </html>
