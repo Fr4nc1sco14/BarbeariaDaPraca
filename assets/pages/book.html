@@ -215,8 +215,6 @@
     width: 60%;
   }
 
-  .muted{margin-top: 10px;}
-
   /* bloco do botão voltar — vai para direita */
   header > div:last-child {
     margin-left: auto;
@@ -259,11 +257,13 @@
         </div>
         <div>
           <h2 style="margin:0">Agendar Corte — Barbearia da Praça</h2>
-          <div class="muted">Siga os passos</div>
+          <div class="muted" id="siga">Siga os passos</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center; text-decoration: none;">
-        <a href="../index.html" style="text-decoration: none;" class="btn-ghost">Voltar</a>
+        <a href="../index.html" style="text-decoration: none;" class="btn-ghost">
+          <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180" style="margin-right: 10px;"></i> Voltar
+        </a>
       </div>
     </header>
 
