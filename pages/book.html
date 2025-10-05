@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agendar — Barbearia da Praça</title>
+
+  <!-- Fontes + FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+  :root{
+    --accent:#d4a15d;
+    --bg:#0b0b0b;
+    --card-radius:14px;
+    --glass: rgba(255,255,255,0.02);
+    --muted: #bdbdbd;
+  }
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:36px auto;padding:20px}
+  .card{
+    background:linear-gradient(180deg, rgba(10,10,10,0.76), rgba(6,6,6,0.72));
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+  .steps{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:20px;
+  }
+  .panel-left{display:flex;flex-direction:column;gap:16px}
+  .panel-right{display:flex;flex-direction:column;gap:16px}
+  .step-card{
+    padding:12px;
+    border-radius:10px;
+    background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .step-title{font-weight:700;margin-bottom:6px;color:var(--accent)}
+  .choices{display:flex;flex-direction:column;gap:8px}
+  .choices button{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:10px 12px;
+    border-radius:10px;
+    color:inherit;
+    text-align:left;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .choices button.selected{
+    background:linear-gradient(90deg,var(--accent),#b8863b);
+    color:#080808;
+    border-color:transparent;
+  }
+  .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  .weekday{font-size:12px;color:var(--muted);text-align:center}
+  .day{
+    min-height:82px;
+    border-radius:10px;
+    padding:8px;
+    background:var(--glass);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    border:1px solid rgba(255,255,255,0.02);
+    cursor:pointer;
+  }
+  .day.disabled{opacity:0.28;cursor:not-allowed}
+  .day.selected{outline:3px solid rgba(212,161,93,0.12)}
+  .day.booked{box-shadow:inset 0 -4px 0 rgba(212,161,93,0.06)}
+  .month-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .month-nav button{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:8px 10px;
+    border-radius:8px;
+    color:inherit;
+    cursor:pointer;
+  }
+  .slots{display:flex;flex-wrap:wrap;gap:8px}
+  .slot{
+    padding:10px 12px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:transparent;
+    cursor:pointer;
+    color:#fff;
+    font-weight:600;
+  }
+  .slot.full{opacity:0.32;cursor:not-allowed}
+  .slot.selected{
+    background:linear-gradient(90deg,var(--accent),#b8863b);
+    color:#080808;
+    border-color:transparent;
+  }
+  .hidden{display:none !important;opacity:0 !important;pointer-events:none}
+  .step-window{
+    padding:16px;
+    border-radius:12px;
+    background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  input,textarea{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:transparent;
+    color:inherit;
+    font-size:14px;
+  }
+  .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+  .btn-primary{
+    background:var(--accent);
+    color:#080808;
+    padding:10px 14px;
+    border-radius:10px;
+    border:0;
+    cursor:pointer;
+    font-weight:700;
+  }
+  .btn-ghost{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:10px 12px;
+    border-radius:10px;
+    color:inherit;
+    cursor:pointer;
+  }
+  .muted{color:var(--muted);font-size:13px}
+  .progress{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .progress .dots{display:flex;gap:6px}
+  .dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#222;
+    border:1px solid rgba(255,255,255,0.03);
+    opacity:0.5;
+  }
+  .dot.active{
+    background:var(--accent);
+    opacity:1;
+    box-shadow:0 4px 10px rgba(212,161,93,0.12);
+  }
+  .back-btn{
+    background:transparent;
+    border:0;
+    color:var(--accent);
+    cursor:pointer;
+    padding:6px 8px;
+    font-weight:600;
+  }
+  .step-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+  }
+  .date-num{font-weight:700;font-size:18px}
+  .day:focus { outline: 3px solid rgba(212,161,93,0.18); }
+  .slot:focus { outline: 3px solid rgba(212,161,93,0.18); }
+  .summary-compact{color:var(--muted);margin-top:8px;white-space:pre-line}
+  .logo{width:64px;height:64px;border-radius:12px;object-fit:cover}
+
+  /* ================================
+     📱 Responsivo ÚNICO a 1000px
+     ================================ */
+  @media (max-width: 1000px) {
+    .wrap {padding:12px;margin:20px auto;}
+    header {
+      flex-direction:column;
+      align-items:flex-start !important;
+      gap:8px;
+    }
+    header h2 {font-size:20px;}
+    .steps {
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .panel-left, .panel-right {width:100%;}
+    .card {padding:14px;}
+    .choices button,
+    .slot,
+    input, textarea,
+    .btn-primary, .btn-ghost {font-size:15px;padding:10px;}
+    .calendar-grid {gap:6px;}
+    .day {min-height:70px;padding:6px;}
+    .month-nav {flex-direction:column;align-items:flex-start;gap:6px;}
+    .slots {justify-content:flex-start;}
+    .actions {flex-direction:column;align-items:stretch;}
+    .actions button {width:100%;}
+    .progress {flex-direction:column;align-items:flex-start;gap:6px;}
+    .dot {width:8px;height:8px;}
+    .summary-compact {font-size:14px;}
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="wrap">
+    <header style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+      <div style="display:flex;gap:12px;align-items:center;">
+        <div style="width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="../assets/images/Logo.png" alt="Logo" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div>
+          <h2 style="margin:0">Agendar Corte — Barbearia da Praça</h2>
+          <div class="muted">Siga os passos</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center; text-decoration: none;">
+        <a href="../index.html" style="text-decoration: none;" class="btn-ghost">Voltar</a>
+      </div>
+    </header>
+
+    <main class="steps">
+
+      <!-- left: steps & summary -->
+      <aside class="panel-left">
+
+        <!-- progress -->
+        <div class="card step-window" id="progressBox">
+          <div class="progress">
+            <div>
+              <div class="muted" id="stepLabel">Passo 1 de 5</div>
+              <div style="font-weight:700" id="stepTitle">Selecione um serviço</div>
+            </div>
+            <div class="dots" aria-hidden="true">
+              <span class="dot" data-step="0"></span>
+              <span class="dot" data-step="1"></span>
+              <span class="dot" data-step="2"></span>
+              <span class="dot" data-step="3"></span>
+              <span class="dot" data-step="4"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 0: Services -->
+        <div class="step-card card step-window" id="stepService">
+          <div class="step-header">
+            <div>
+              <div class="step-title">1 — Serviço</div>
+              <div class="muted">Escolha o tipo de serviço</div>
+            </div>
+            <div></div>
+          </div>
+          <div class="choices" id="serviceChoices">
+            <!-- buttons injected by JS -->
+          </div>
+        </div>
+
+        <!-- Step 1: Professional -->
+        <div class="step-card card step-window hidden" id="stepProf">
+          <div class="step-header">
+            <div>
+              <div class="step-title">2 — Profissional</div>
+              <div class="muted">Escolha quem irá atender</div>
+            </div>
+            <div>
+              <button class="back-btn" id="backFromProf" type="button">&larr; Voltar</button>
+            </div>
+          </div>
+          <div id="profPane" class="step-pane active">
+            <div class="choices" id="profChoices">
+              <!-- injected by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="step-card card step-window hidden" id="stepSummary">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Resumo</div>
+              <div class="muted">Revise antes de continuar</div>
+            </div>
+            <div>
+              <button class="back-btn" id="backFromCal" type="button">&larr; Voltar</button>
+            </div>
+          </div>
+          <div id="summary" class="summary-compact">Serviço e profissional ainda não selecionados.</div>
+        </div>
+
+      </aside>
+
+      <!-- right: calendar, slots, form -->
+      <section class="panel-right card">
+
+        <!-- Calendar -->
+        <div id="calendarWindow" class="step-window hidden">
+          <div class="step-header">
+            <div>
+              <div class="step-title">3 — Escolha a Data</div>
+              <div class="muted">Clique num dia para ver horários</div>
+            </div>
+            <div>
+              <button class="back-btn" id="backFromCalendar" type="button">&larr; Voltar</button>
+            </div>
+          </div>
+
+          <div class="month-nav">
+            <div>
+              <strong id="monthLabel">—</strong>
+              <div class="muted">Clique num dia para ver horários</div>
+            </div>
+            <div>
+              <button id="prevMonth" aria-label="Mês anterior" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+              <button id="nextMonth" aria-label="Próximo mês" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <div class="calendar-grid" id="calendar">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <!-- Slots -->
+        <div id="slotsWindow" class="step-window hidden" style="margin-top:12px">
+          <div class="step-header">
+            <div>
+              <div class="step-title">4 — Horários</div>
+              <div class="muted">Escolha um horário disponível</div>
+            </div>
+            <div>
+              <button class="back-btn" id="backFromTime" type="button">&larr; Voltar</button>
+            </div>
+          </div>
+
+          <div id="slotsPane" class="step-pane">
+            <div class="muted" id="slotHint">Escolha um dia e um profissional para ver horários.</div>
+            <div class="slots" id="slotsContainer" style="margin-top:10px"></div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div id="formWindow" class="step-window hidden" style="margin-top:18px">
+          <div class="step-header">
+            <div>
+              <div class="step-title">5 — Seus Dados</div>
+              <div class="muted">Preencha os dados para confirmar</div>
+            </div>
+            <div>
+              <button class="back-btn" id="backFromForm" type="button">&larr; Voltar</button>
+            </div>
+          </div>
+
+          <div id="formPane" class="step-pane">
+            <div class="muted">Preencha os seus dados para confirmar a reserva.</div>
+            <div style="margin-top:10px">
+              <input id="clientName" placeholder="Primeiro e último nome" aria-label="Nome completo" />
+            </div>
+            <div style="margin-top:8px">
+              <input id="clientPhone" placeholder="Telemóvel (+351 912 345 678)" aria-label="Telemóvel" />
+            </div>
+            <div style="margin-top:8px">
+              <input id="clientEmail" placeholder="email@exemplo.com" aria-label="Email" />
+            </div>
+            <div style="margin-top:8px">
+              <textarea id="clientNotes" rows="3" placeholder="Observações (opcional)"></textarea>
+            </div>
+            <div class="actions">
+              <button id="cancelBtn" class="btn-ghost" type="button">Cancelar</button>
+              <button id="confirmBtn" class="btn-primary" disabled type="button">Confirmar Reserva</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    /* ============================
+       LÓGICA UNIFICADA E FUNCIONAL
+       PT-PT — Local (localStorage)
+       ============================ */
+
+    /* Horários abertos por dia (0=Dom,1=Seg,...6=Sáb) */
+    const OPEN_SCHEDULE = {
+      0: [], // Domingo fechado
+      1: [['09:00','12:00'],['14:00','19:00']], // Seg
+      2: [], // Ter fechado
+      3: [['09:00','12:00'],['14:00','19:00']], // Qua
+      4: [['09:00','12:00'],['14:00','19:00']], // Qui
+      5: [['09:00','12:00'],['14:00','19:00']], // Sex
+      6: [['09:00','12:00'],['14:00','17:00']]  // Sáb
+    };
+
+    /* Serviços e profissionais */
+    const SERVICES = [
+      { id: 'corte', name: 'Corte de Cabelo', durationMin: 30 },
+      { id: 'cabelo-barba', name: 'Cabelo e Barba', durationMin: 30 },
+      { id: 'corte-crianca', name: 'Corte Cabelo Criança', durationMin: 30 },
+      { id: 'coloracao', name: 'Coloração de Cabelo', durationMin: 30 }
+    ];
+    const PROFESSIONALS = [
+      { id: 'bruno', name: 'Bruno Carvalho' },
+      { id: 'rafael', name: 'Rafael Gonçalves' }
+    ];
+
+    const SLOT_MINUTES = 30;            // incremento dos slots
+    const BOOKINGS_KEY = 'barbearia_bookings_v2';
+    const MAX_MONTHS_AHEAD = 6;         // limita calendário
+
+    const state = { service: null, professional: null, date: null, time: null };
+
+    // utilitários
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const norm = s => String(s || '').trim().normalize('NFC');
+
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function timeToMinutes(t){ const [h,m] = t.split(':').map(Number); return h*60 + m; }
+    function minutesToTime(m){ return pad(Math.floor(m/60)) + ':' + pad(m % 60); }
+    function fmtDate(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+    function parseISO(s){ if(!s) return null; const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); }
+
+    // carregar / guardar bookings
+    function loadBookings(){ try { return JSON.parse(localStorage.getItem(BOOKINGS_KEY)) || []; } catch(e){ return []; } }
+    function saveBookings(arr){ localStorage.setItem(BOOKINGS_KEY, JSON.stringify(arr)); }
+
+    // UI refs
+    const serviceChoices = $('#serviceChoices');
+    const profChoices = $('#profChoices');
+    const summaryEl = $('#summary');
+    const monthLabel = $('#monthLabel');
+    const calendarEl = $('#calendar');
+    const prevMonthBtn = $('#prevMonth');
+    const nextMonthBtn = $('#nextMonth');
+    const slotsContainer = $('#slotsContainer');
+    const slotHint = $('#slotHint');
+
+    const clientName = $('#clientName');
+    const clientPhone = $('#clientPhone');
+    const clientEmail = $('#clientEmail');
+    const clientNotes = $('#clientNotes');
+    const confirmBtn = $('#confirmBtn');
+
+    const stepService = $('#stepService');
+    const stepProf = $('#stepProf');
+    const stepSummary = $('#stepSummary');
+    const calendarWindow = $('#calendarWindow');
+    const slotsWindow = $('#slotsWindow');
+    const formWindow = $('#formWindow');
+
+    const progressDots = $$('.dot');
+    const stepLabel = $('#stepLabel');
+    const stepTitle = $('#stepTitle');
+
+    /* estado de visualização do mês (inicia no mês actual) */
+    let view = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    let currentStep = 0;
+
+    /* Popula serviços e profissionais na UI */
+    function renderServices(){
+      serviceChoices.innerHTML = '';
+      for(const s of SERVICES){
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.service = s.id;
+        btn.textContent = s.name + '  —  ' + s.durationMin + ' min';
+        btn.addEventListener('click', ()=> {
+          $$('#serviceChoices button').forEach(b=>b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.service = s.id;
+          // reset dependentes
+          state.date = null; state.time = null;
+          $$('.day').forEach(x=>x.classList.remove('selected'));
+          $$('.slot').forEach(x=>x.classList.remove('selected'));
+          updateSummary();
+          // ir para profissional automaticamente
+          setTimeout(()=> showStep(1), 120);
+        });
+        serviceChoices.appendChild(btn);
+      }
+    }
+
+    function renderProfessionals(){
+      profChoices.innerHTML = '';
+      for(const p of PROFESSIONALS){
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.prof = p.id;
+        btn.textContent = p.name;
+        btn.addEventListener('click', ()=> {
+          $$('#profChoices button').forEach(b=>b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.professional = p.id;
+          // reset dependentes
+          state.date = null; state.time = null;
+          $$('.day').forEach(x=>x.classList.remove('selected'));
+          $$('.slot').forEach(x=>x.classList.remove('selected'));
+          updateSummary();
+          // avança ao calendário
+          setTimeout(()=> { generateCalendar(); showStep(2); }, 120);
+        });
+        profChoices.appendChild(btn);
+      }
+    }
+
+    /* Stepper UI */
+    function setStepVisuals(n){
+      currentStep = n;
+      stepService.classList.toggle('hidden', n !== 0);
+      stepProf.classList.toggle('hidden', n !== 1);
+      stepSummary.classList.toggle('hidden', n < 2);
+      calendarWindow.classList.toggle('hidden', n !== 2);
+      slotsWindow.classList.toggle('hidden', n !== 3);
+      formWindow.classList.toggle('hidden', n !== 4);
+
+      stepLabel.textContent = `Passo ${n+1} de 5`;
+      const titles = ['Selecione um serviço','Escolha o profissional','Selecione uma data','Escolha um horário','Preencha os seus dados'];
+      stepTitle.textContent = titles[n] || '';
+
+      progressDots.forEach(d => {
+        const idx = Number(d.dataset.step);
+        d.classList.toggle('active', idx <= n);
+      });
+    }
+
+    function showStep(n){ setStepVisuals(n); if(n===2) generateCalendar(); if(n===3) generateSlots(); if(n===4) setTimeout(()=>clientName.focus(),150); }
+
+    /* Calendar generation */
+    function renderWeekdays(){
+      calendarEl.innerHTML = '';
+      const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+      for(const d of days){
+        const el = document.createElement('div'); el.className='weekday'; el.textContent=d; calendarEl.appendChild(el);
+      }
+    }
+
+    function generateCalendar(){
+      renderWeekdays();
+      const first = new Date(view.getFullYear(), view.getMonth(),1);
+      const last = new Date(view.getFullYear(), view.getMonth()+1,0);
+      const startWeekday = first.getDay();
+      // fillers
+      for(let i=0;i<startWeekday;i++){
+        const f = document.createElement('div'); f.className='day disabled'; calendarEl.appendChild(f);
+      }
+
+      const bookings = loadBookings();
+      const today = new Date(); const todayStr = fmtDate(today);
+
+      for(let d=1; d<=last.getDate(); d++){
+        const dateObj = new Date(view.getFullYear(), view.getMonth(), d);
+        const dateStr = fmtDate(dateObj);
+        const weekday = dateObj.getDay();
+
+        const dayEl = document.createElement('div');
+        dayEl.className='day';
+        dayEl.setAttribute('data-date', dateStr);
+        dayEl.setAttribute('role','button');
+        dayEl.setAttribute('tabindex','0');
+        dayEl.setAttribute('aria-label', dateObj.toLocaleDateString('pt-PT', {weekday:'long', year:'numeric', month:'long', day:'numeric'}));
+
+        const num = document.createElement('div'); num.className='date-num'; num.textContent = d;
+        dayEl.appendChild(num);
+
+        // check closed / past / beyond range
+        const closed = Array.isArray(OPEN_SCHEDULE[weekday]) && OPEN_SCHEDULE[weekday].length === 0;
+        const isPast = dateStr < todayStr;
+        const monthDiff = (dateObj.getFullYear()-today.getFullYear())*12 + (dateObj.getMonth()-today.getMonth());
+        const beyond = monthDiff < 0 || monthDiff > MAX_MONTHS_AHEAD;
+
+        if(isPast || beyond || closed) dayEl.classList.add('disabled');
+
+        // mark booked if professional has bookings that day
+        if(state.professional){
+          const profDay = bookings.filter(b => norm(b.professional) === norm(state.professional) && b.date === dateStr);
+          if(profDay.length) dayEl.classList.add('booked');
+        }
+
+        // click
+        dayEl.addEventListener('click', ()=> {
+          if(dayEl.classList.contains('disabled')) return;
+          $$('.day').forEach(x=>x.classList.remove('selected'));
+          dayEl.classList.add('selected');
+          state.date = dateStr;
+          state.time = null;
+          $$('.slot').forEach(x=>x.classList.remove('selected'));
+          updateSummary();
+          generateSlots();
+          showStep(3);
+        });
+        dayEl.addEventListener('keydown', (ev)=> { if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); dayEl.click(); } });
+
+        calendarEl.appendChild(dayEl);
+      }
+
+      monthLabel.textContent = view.toLocaleString('pt-PT', { month: 'long', year: 'numeric' });
+    }
+
+    prevMonthBtn.addEventListener('click', ()=> {
+      view = new Date(view.getFullYear(), view.getMonth()-1, 1);
+      generateCalendar();
+    });
+    nextMonthBtn.addEventListener('click', ()=> {
+      view = new Date(view.getFullYear(), view.getMonth()+1, 1);
+      generateCalendar();
+    });
+
+    /* Slots generation for selected date & professional */
+    function generateSlots(){
+      slotsContainer.innerHTML = '';
+      slotHint.textContent = '';
+      if(!state.service){ slotHint.textContent = 'Seleccione um serviço para determinar a duração.'; return; }
+      if(!state.professional){ slotHint.textContent = 'Seleccione um profissional para ver horários.'; return; }
+      if(!state.date){ slotHint.textContent = 'Seleccione uma data no calendário.'; return; }
+
+      const bookings = loadBookings().filter(b => norm(b.professional) === norm(state.professional) && b.date === state.date);
+      const srv = SERVICES.find(s => s.id === state.service);
+      const duration = srv ? srv.durationMin : 30;
+
+      const dateObj = parseISO(state.date);
+      const weekday = dateObj.getDay();
+      const intervals = OPEN_SCHEDULE[weekday] || [];
+      if(intervals.length === 0){ slotsContainer.innerHTML = '<div class="muted">Barbearia fechada neste dia.</div>'; return; }
+
+      slotHint.textContent = 'Cada reserva bloqueia o intervalo para o profissional escolhido.';
+
+      const allSlots = [];
+      for(const [start,end] of intervals){
+        let cur = timeToMinutes(start);
+        const endMin = timeToMinutes(end);
+        while(cur + duration <= endMin){
+          allSlots.push(minutesToTime(cur));
+          cur += SLOT_MINUTES;
+        }
+      }
+
+      if(allSlots.length === 0){ slotsContainer.innerHTML = '<div class="muted">Nenhum horário disponível.</div>'; return; }
+
+      for(const t of allSlots){
+        const startMin = timeToMinutes(t);
+        const endMin = startMin + duration;
+        let clash = false;
+
+        for(const b of bookings){
+          const bStart = timeToMinutes(b.time);
+          const bDuration = (SERVICES.find(s=>s.id===b.service)?.durationMin) || 30;
+          const bEnd = bStart + bDuration;
+          if(startMin < bEnd && endMin > bStart){ clash = true; break; }
+        }
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'slot' + (clash ? ' full' : '');
+        btn.textContent = t;
+        btn.dataset.time = t;
+        if(!clash){
+          btn.addEventListener('click', ()=> {
+            $$('.slot').forEach(x=>x.classList.remove('selected'));
+            btn.classList.add('selected');
+            state.time = t;
+            updateSummary();
+            checkEnableConfirm();
+            // avançar para formulário automaticamente
+            setTimeout(()=> showStep(4), 150);
+          });
+        } else {
+          btn.disabled = true;
+        }
+        slotsContainer.appendChild(btn);
+      }
+
+      // if previously selected time still available, mark it
+      if(state.time){
+        const exists = document.querySelector(`.slot[data-time="${state.time}"]:not(.full)`);
+        if(exists) exists.classList.add('selected'); else state.time = null;
+      }
+    }
+
+    function updateSummary(){
+      const s = SERVICES.find(x=>x.id===state.service);
+      const p = PROFESSIONALS.find(x=>x.id===state.professional);
+      let html = `<strong>Serviço:</strong> ${s ? s.name : '—'}\n<strong>Profissional:</strong> ${p ? p.name : '—'}`;
+      if(state.date){ const d = parseISO(state.date); html += `\n<strong>Data:</strong> ${d.toLocaleDateString('pt-PT')}`; }
+      if(state.time) html += `\n<strong>Hora:</strong> ${state.time}`;
+      summaryEl.innerHTML = html;
+    }
+
+    /* validações simples */
+    function validatePhone(v){
+      const cleaned = v.replace(/\s+/g,'');
+      return /^\+351\d{9}$/.test(cleaned) || /^9\d{8}$/.test(cleaned);
+    }
+    function validateEmail(e){ return /\S+@\S+\.\S+/.test(e); }
+
+    /* enable confirm button quando tudo preenchido */
+    function checkEnableConfirm(){
+      const name = clientName.value.trim();
+      const phone = clientPhone.value.trim();
+      const email = clientEmail.value.trim();
+      confirmBtn.disabled = !(state.service && state.professional && state.date && state.time && name && phone && email && validateEmail(email) && validatePhone(phone));
+    }
+
+    clientName.addEventListener('input', checkEnableConfirm);
+    clientPhone.addEventListener('input', checkEnableConfirm);
+    clientEmail.addEventListener('input', checkEnableConfirm);
+
+    /* confirmar reserva */
+    confirmBtn.addEventListener('click', ()=> {
+      if(confirmBtn.disabled) return;
+      // recolher dados
+      const name = clientName.value.trim();
+      const phone = clientPhone.value.trim();
+      const email = clientEmail.value.trim();
+      const notes = clientNotes.value.trim();
+
+      // última validação e conflito server-side like
+      const bookings = loadBookings();
+      const srv = SERVICES.find(s => s.id === state.service);
+      const duration = srv ? srv.durationMin : 30;
+      const startMin = timeToMinutes(state.time);
+      const endMin = startMin + duration;
+      const profBookings = bookings.filter(b => norm(b.professional) === norm(state.professional) && b.date === state.date);
+
+      for(const b of profBookings){
+        const bStart = timeToMinutes(b.time);
+        const bDur = (SERVICES.find(s=>s.id===b.service)?.durationMin) || 30;
+        const bEnd = bStart + bDur;
+        if(startMin < bEnd && endMin > bStart){
+          alert('Desculpe — o horário ficou indisponível (conflito). Escolha outro horário.');
+          generateSlots();
+          return;
+        }
+      }
+
+      // gravar
+      const booking = {
+        id: 'b_' + Date.now(),
+        service: state.service,
+        professional: state.professional,
+        date: state.date,
+        time: state.time,
+        name, phone, email, notes,
+        createdAt: new Date().toISOString()
+      };
+      bookings.push(booking);
+      saveBookings(bookings);
+
+      // feedback
+      alert(`Reserva confirmada: ${state.date} às ${state.time} com ${PROFESSIONALS.find(p=>p.id===state.professional).name}.`);
+
+      // reset UI / estado
+      state.service = null; state.professional = null; state.date = null; state.time = null;
+      $$('#serviceChoices button, #profChoices button, .day, .slot').forEach(b=>b.classList.remove('selected'));
+      clientName.value = ''; clientPhone.value = ''; clientEmail.value = ''; clientNotes.value = '';
+      updateSummary();
+      showStep(0);
+      generateCalendar();
+      generateSlots();
+      checkEnableConfirm();
+    });
+
+    /* cancel */
+    $('#cancelBtn').addEventListener('click', ()=> {
+      if(confirm('Cancelar processo de marcação?')) {
+        state.service = null; state.professional = null; state.date = null; state.time = null;
+        $$('#serviceChoices button, #profChoices button, .day, .slot').forEach(b=>b.classList.remove('selected'));
+        clientName.value=''; clientPhone.value=''; clientEmail.value=''; clientNotes.value='';
+        updateSummary();
+        showStep(0);
+      }
+    });
+
+    /* back navigation */
+    $('#backFromProf').addEventListener('click', ()=> showStep(0));
+    $('#backFromCal').addEventListener('click', ()=> showStep(1));
+    $('#backFromCalendar').addEventListener('click', ()=> showStep(1));
+    $('#backFromTime').addEventListener('click', ()=> showStep(2));
+    $('#backFromForm').addEventListener('click', ()=> showStep(3));
+
+    /* Inicialização */
+    (function init(){
+      // popular UI
+      renderServices();
+      renderProfessionals();
+      updateSummary();
+      showStep(0);
+      generateCalendar();
+      generateSlots();
+      checkEnableConfirm();
+    })();
+
+    // Expose for debug (opcional)
+    window._bb = { loadBookings, saveBookings, generateCalendar, generateSlots, SERVICES, PROFESSIONALS };
+  </script>
+
+</body>
+</html>

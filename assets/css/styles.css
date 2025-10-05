@@ -588,13 +588,13 @@ body {
   }
 
   .Gallery-inner {
-    padding: 0 8px;
+    padding: 0 18px;
   }
 
   /* 3 colunas responsivas (3x3 quando houver >=9 itens) */
   .Gallery-Struct {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     justify-items: center;
     align-items: start;
